@@ -5,9 +5,9 @@ import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 
 
-const server = express();     
-server.use(cors());            
-server.use(express.json());    
+const server = express();
+server.use(cors());
+server.use(express.json());
 server.use(router)
 
 dotenv.config();
@@ -15,7 +15,7 @@ dotenv.config();
 const mongoClient = new MongoClient(process.env.DATABASE_URL);
 
 try {
-   
+
     await mongoClient.connect()
     console.log("MongoDB connected!")
 } catch (err) {
