@@ -49,6 +49,18 @@ export async function signIn(req, res) {
     }
 }
 
+export async function signOut(req, res) {
+
+    try {
+
+        await db.collection("sessions").deleteOne({ token })
+        res.status(200).send("User logout successfully");
+
+    } catch (err) {
+        res.status(500).send(err.message)
+    }
+}
+
 
 /*export async function loggedUser(req, res) {
 
