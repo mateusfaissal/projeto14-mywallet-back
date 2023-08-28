@@ -1,6 +1,16 @@
 export function validateSchema(schema) {
     return (req, res, next) => {
-        const validation = schema.validate(req.body, { abortEarly: false })
+
+        const { type } = req.params;
+        const { value, description } = req.body;
+        
+        let validation;
+
+        if(type === undefined || type === null) {
+            validation = schema.validate(req.body, {abortEarly: false});
+        } else {
+            validation = schema.validate({value, type, description}, {abortEarly: false});
+        }
 
         if (validation.error) {
             const errors = validation.error.details.map(det => det.message)
