@@ -32,7 +32,7 @@ export async function signIn(req, res) {
     try {
 
         const user = await db.collection("users").findOne({ email });
-        if (!user) return res.status(409).send("This user does not exists :(");
+        if (!user) return res.status(404).send("This user does not exists :(");
 
         const verifyPassword = bcrypt.compareSync(password, user.password);
         if (!verifyPassword) return res.status(401).send("Incorrect password :(");
